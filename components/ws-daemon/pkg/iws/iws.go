@@ -73,11 +73,6 @@ var (
 // ServeWorkspace establishes the IWS server for a workspace
 func ServeWorkspace(uidmapper *Uidmapper) func(ctx context.Context, ws *session.Workspace) error {
 	return func(ctx context.Context, ws *session.Workspace) (err error) {
-		// TODO (aledbf): why Usernamespaced?
-		if !ws.FullWorkspaceBackup {
-			return nil
-		}
-
 		//nolint:ineffassign
 		span, ctx := opentracing.StartSpanFromContext(ctx, "iws.ServeWorkspace")
 		defer tracing.FinishSpan(span, &err)
